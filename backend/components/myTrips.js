@@ -6,9 +6,9 @@ function myTrips(app) {
             console.log("Received post request from mytrips in server")
             let obj = req.body; 
             const email = obj.email;
-            console.log("obj in server is ", req);
+            
             console.log(email);
-            const user = user_model.findOne({ email: email });
+            const user = await user_model.findOne({ email: email });
             console.log(user);
             if (!user) {
                 return res.json({

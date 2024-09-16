@@ -18,7 +18,8 @@ export default function Dashboard() {
      }, []);
     const [selectedCategory, setSelectedCategory] = useState("hotels");
     
-    function handleLogout(){
+    function handleLogout() {
+        localStorage.removeItem('email');
         localStorage.removeItem('token');
         router.push('/V1/Login');
     }
@@ -33,6 +34,13 @@ export default function Dashboard() {
     const attractions_st = useStore(state => state.attractions);
     const email=localStorage.getItem("email");
     
+    function handleDelete(e) { 
+        e.preventDefault();
+        useStore.setState({foods: []});
+        useStore.setState({hotels: []});
+        useStore.setState({attractions: []});
+        toast.success('Your Trip has been deleted');
+    }
     async function handleSave(e) {
         console.log(email);
         e.preventDefault();
@@ -47,7 +55,7 @@ export default function Dashboard() {
             const response = await axios.post("http://localhost:8000/api/v1/save", {
                 obj
             });
-            console.log(response);
+            console.log("reponse is",response);
             toast.success('Your Trip has been saved');
 
         }
@@ -113,12 +121,20 @@ export default function Dashboard() {
                 <h2 className="text-2xl font-bold mb-4 capitalize">{selectedCategory}</h2>
                 {
                 selectedCategory=== 'all' && (
-                    <div className='h-[100px] w-[350px] mb-4 mt-2'>
+                    <div className='h-[100px] w-[350px] '>
                         <button onClick={handleSave}
-                                className='h-[50px] w-[150px] border border-green-300 rounded'>Save</button>        
+                                className='h-[50px] w-[150px] border border-green-300 rounded mr-4'>Save</button>  
+                        <button onClick={handleDelete}
+                                className='h-[50px] w-[150px] border border-red-500 rounded'>Delete
+                                
+                        </button>
                     </div>
+                        
+                    
+                        
                 )
                 }
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {selectedCategory === 'foods' && foods.map((food, index) => (
             <PlaceCard

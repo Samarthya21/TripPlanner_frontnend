@@ -4,19 +4,23 @@ import useStore from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/useC
 import {Toaster , toast} from 'react-hot-toast'; 
 
 export default function PlaceCard({ name, rate, image, type,selectedCategory }) {
-    const foods = useStore(state => state.foods); // Accessing the 'foods' array from the store
+    const foods = useStore(state => state.foods); 
     const addFood = useStore(state => state.addFood);
     const hotels = useStore(state => state.hotels);
     const addHotel = useStore(state => state.addHotel);
     const attractions = useStore(state => state.attractions);
     const addAttraction = useStore(state => state.addAttraction);
     const email = localStorage.getItem('email');
+    function generateUniqueId() {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    }
     function handleClick(e){
         e.preventDefault();
         
         toast.success('Added to your trip');
         
         let obj = {
+            id: generateUniqueId(),
             name: name,
             rate: rate,
             image: image,
@@ -45,7 +49,7 @@ export default function PlaceCard({ name, rate, image, type,selectedCategory }) 
     }
     return (
         
-        <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white transform transition-transform duration-300 hover:scale-105">
+        <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white transform transition-transform duration-300 hover:scale-105 m-4">
             <img className="w-full h-48 object-cover" src={image} alt={name} />
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2 ">{name}</div>

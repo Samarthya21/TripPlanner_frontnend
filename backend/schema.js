@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 const { type } = require('os');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const db_link = process.env.DATABASE;
-mongoose.connect("mongodb+srv://samarthya777:AMirZR2Y0tawLKED@cluster0.1pcf65w.mongodb.net/Customer?retryWrites=true&w=majority")
+const db_link = process.env.DATABASE_URL;
+
+mongoose.connect(db_link)
     .then(function (db) {
         console.log("Database connnected");
     })

@@ -1,16 +1,29 @@
 "use client"
-
+import  PlaceCard  from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/components/PlaceCard/PlaceCard.js';
 import { jwtDecode } from "jwt-decode";
-import { useEffect } from "react"
+import { useEffect , useState} from "react"
 import axios from "axios";
+import  TripsCard  from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/components/TripsCard/TripsCard.js';
+import { useRouter } from "next/navigation";
 
 export default function MyTrips() { 
+    const router = useRouter();
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/V1/Login');
+        }
+     }, []);
+    const [trips,setTrips]=useState([]);
     async function getTrips(email) {
         try {
             const response = await axios.post("http://localhost:8000/api/v1/mytrips", {
-                email
+                email:email
             });
-            console.log(response);
+            
+            localStorage.setItem("trips", JSON.stringify(response.data.data.trip));
+            setTrips(response.data.data.trip);
+            console.log(trips);
         }
         catch (err) {
             console.log(err);
@@ -23,14 +36,24 @@ export default function MyTrips() {
         }
         else {
             const decoded = jwtDecode(token);
-            const email = decoded.email;
+            
+            const email = decoded.user.email;
+            
             getTrips(email);
         }
     },[])
     return (
-        <div className="h-screen w-screen">MyTrips
-            <div>
-                
+
+        <div className="h-screen w-screen">
+        <div className='font-semibold text-4xl'>MyTrips</div>
+        <div className='flex flex-wrap m-10 '>
+        {trips.map((trip, index) => (
+                <div key={index}>
+                    <div>
+                        <TripsCard trip={trip} index={index} />
+                    </div>
+                </div>
+            ))}
         </div>
         </div>
     )

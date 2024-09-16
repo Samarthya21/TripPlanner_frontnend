@@ -27,6 +27,7 @@ export default function Login() {
           console.log(response.data);
           
           if (response.data.token) {
+                localStorage.setItem('email', email);
                 localStorage.setItem('token', response.data.token);
                 
                 router.push('/V1/HomePage');
