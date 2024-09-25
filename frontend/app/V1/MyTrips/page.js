@@ -1,9 +1,9 @@
 "use client"
-import  PlaceCard  from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/components/PlaceCard/PlaceCard.js';
+
 import { jwtDecode } from "jwt-decode";
 import { useEffect , useState} from "react"
 import axios from "axios";
-import  TripsCard  from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/components/TripsCard/TripsCard.js';
+import  TripsCard  from '../../components/TripsCard/TripsCard';
 import { useRouter } from "next/navigation";
 
 export default function MyTrips() { 
@@ -16,8 +16,11 @@ export default function MyTrips() {
      }, []);
     const [trips,setTrips]=useState([]);
     async function getTrips(email) {
+        const apiUrl = window.location.hostname === 'localhost'
+        ? "http://localhost:8000/api/v1"
+        : "https://your-public-url.com/api/v1";
         try {
-            const response = await axios.post("http://localhost:8000/api/v1/mytrips", {
+            const response = await axios.post(`${apiUrl}/mytrips`, {
                 email:email
             });
             

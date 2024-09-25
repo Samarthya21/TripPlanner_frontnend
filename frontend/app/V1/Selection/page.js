@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { FaHotel, FaUtensils, FaMapMarkerAlt, FaSignOutAlt} from 'react-icons/fa';
-import  PlaceCard  from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/components/PlaceCard/PlaceCard.js';
-import useStore from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/useCreateStore.js'; 
+import  PlaceCard  from '../../components/PlaceCard/PlaceCard.js';
+import useStore from '../../useCreateStore'; 
 import axios from 'axios';
 import { Toaster, toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -50,9 +50,11 @@ export default function Dashboard() {
             attractions: attractions_st,
             email:email,
         }
-        
+        const apiUrl = window.location.hostname === 'localhost'
+        ? "http://localhost:8000/api/v1"
+        : "https://your-public-url.com/api/v1";
         try {
-            const response = await axios.post("http://localhost:8000/api/v1/save", {
+            const response = await axios.post( `${apiUrl}/save`, {
                 obj
             });
             console.log("reponse is",response);

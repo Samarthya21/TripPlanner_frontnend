@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useStore from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/useCreateStore.js'; 
+import useStore from "../../useCreateStore.js"; 
 import {Toaster , toast} from 'react-hot-toast'; 
 
 export default function PlaceCard({ name, rate, image, type,selectedCategory }) {

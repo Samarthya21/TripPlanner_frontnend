@@ -4,7 +4,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const db_link = process.env.DATABASE_URL;
-
+//const db_link = "mongodb+srv://samarthya777:AMirZR2Y0tawLKED@cluster0.1pcf65w.mongodb.net/Customer?retryWrites=true&w=majority";
+//const db_link="mongodb+srv://samarthya777:AMirZR2Y0tawLKED@cluster0.1pcf65w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongoose.connect(db_link)
     .then(function (db) {
         console.log("Database connnected");
@@ -25,7 +26,7 @@ mongoose.connect(db_link)
             type: String,
             default: 0,
         },
-    }, { _id: false }); // Disable _id for sub-schema
+    }, { _id: false }); 
         
 
 const tripItemSchema = new mongoose.Schema({

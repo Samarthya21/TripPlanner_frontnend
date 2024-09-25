@@ -3,7 +3,7 @@ import { useState ,useEffect} from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import useStore from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/useCreateStore.js';
+import useStateStore from "../../useCreateStore";
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -38,7 +38,7 @@ export default function Page() {
             const location_response = await axios.get('https://api.geoapify.com/v1/geocode/search', {
                 params: {
                   text: city,
-                  apiKey: process.env.api_key
+                  apiKey: "2fe681d99c6141298640c0d2a22141b4"
                 }
             });
             const location = location_response.data.features[0];

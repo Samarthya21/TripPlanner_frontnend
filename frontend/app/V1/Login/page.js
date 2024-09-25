@@ -17,13 +17,17 @@ export default function Login() {
         const password = document.querySelector('input[name="password"]').value;
         console.log(email);
         console.log(password);
+        const apiUrl = window.location.hostname === 'localhost'
+        ? "http://localhost:8000/api/v1"
+        : "https://your-public-url.com/api/v1";
+      
         try {
             
             
-            const response = await axios.post('http://localhost:8000/api/v1/login', {
-                email,
-                password
-            });
+          const response = await axios.post(`${apiUrl}/login`, {
+            email,
+            password,
+          });
           console.log(response.data);
           
           if (response.data.token) {

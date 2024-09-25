@@ -8,11 +8,14 @@ export default function SignUp() {
         const email = document.querySelector('input[name="email"]').value;
         const password = document.querySelector('input[name="password"]').value;
         console.log(email);
-        console.log(password);
+      console.log(password);
+      const apiUrl = window.location.hostname === 'localhost'
+        ? "http://localhost:8000/api/v1"
+        : "https://your-public-url.com/api/v1";
         try {
             
             
-            const response = await axios.post('http://localhost:8000/api/v1/signup', {
+            const response = await axios.post(`${apiUrl}/signup`, {
                 email,
                 password
             });
