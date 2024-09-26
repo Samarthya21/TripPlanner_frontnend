@@ -11,7 +11,7 @@ export default function SignUp() {
       console.log(password);
       const apiUrl = window.location.hostname === 'localhost'
         ? "http://localhost:8000/api/v1"
-        : "https://your-public-url.com/api/v1";
+        : "https://tripplanner-backend.onrender.com/api/v1";
         try {
             
             
