@@ -2,6 +2,9 @@ const user_model = require('../schema.js');
 const jwt = require('jsonwebtoken');
 
 function loginroute(app) {
+    app.get('/api/v1/login', (req, res) => { 
+        return res.json("login");
+    })
     app.post('/api/v1/login', async (req, res) => { 
         try {
             console.log('req.body: ', req.body);
