@@ -1,7 +1,9 @@
 const user_model = require('../schema.js');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 function loginroute(app) {
+    app.use(cors());
     app.get('/api/v1/login', (req, res) => { 
         return res.json("login");
     })
