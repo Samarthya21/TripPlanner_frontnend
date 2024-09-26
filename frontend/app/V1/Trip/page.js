@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import  PlaceCard  from '/Users/samarthyaalok/Desktop/TripPlanner/frontend/app/components/PlaceCard/PlaceCard.js';
+import  PlaceCard  from '../../components/PlaceCard/PlaceCard.js';
 
 export default function TripPage() {
     
