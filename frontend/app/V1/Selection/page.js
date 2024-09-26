@@ -57,7 +57,7 @@ export default function Dashboard() {
         }
         const apiUrl = window.location.hostname === 'localhost'
         ? "http://localhost:8000/api/v1"
-        : "https://tripplanner-backend.onrender.com/api/v1";
+        : "https://tripplanner-frontnend.onrender.com/api/v1";
 
         try {
             const response = await axios.post(`${apiUrl}/save`, { obj });
